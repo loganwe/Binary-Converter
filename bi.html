@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Binary Converter</h1>
+
+    <!-- Decimal to Binary -->
+    <h3>Convert Decimal to Binary</h3>
+    <input type="number" id="decimalInput" placeholder="Enter decimal number">
+    <button onclick="convertToBinary()">Convert</button>
+    <div class="result" id="binaryResult"></div>
+
+    <!-- Binary to Decimal -->
+    <h3>Convert Binary to Decimal</h3>
+    <input type="text" id="binaryInput" placeholder="Enter binary number">
+    <button onclick="convertToDecimal()">Convert</button>
+    <div class="result" id="decimalResult"></div>
+
+    <script>
+        // Function to format binary with a space after every 4 bits (byte)
+        function formatBinary(binary) {
+            return binary.match(/.{1,4}/g).join(' ');
+        }
+
+        // Convert Decimal to Binary
+        function convertToBinary() {
+            const decimal = document.getElementById("decimalInput").value;
+            let binary = parseInt(decimal).toString(2);
+            binary = binary.padStart(Math.ceil(binary.length / 4) * 4, '0'); // Pad to make groups of 4 bits
+            document.getElementById("binaryResult").innerHTML = "Binary: " + formatBinary(binary);
+        }
+
+        // Convert Binary to Decimal
+        function convertToDecimal() {
+            const binary = document.getElementById("binaryInput").value.replace(/\s+/g, ''); // Remove spaces
+            const decimal = parseInt(binary, 2);
+            document.getElementById("decimalResult").innerHTML = "Decimal: " + decimal;
+        }
+    </script>
+</body>
+</html>
